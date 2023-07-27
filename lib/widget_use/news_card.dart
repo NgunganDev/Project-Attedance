@@ -35,11 +35,13 @@ class NewsCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // Text('Today News'),
                 Text(time, style: TextStyle(
                   fontSize: size.height * 0.04,
                   fontWeight: FontWeight.w600,
-                ),)
+                ),),
+                TextButton(onPressed: (){
+
+                }, child: Text('all news')),
               ],
             ),
           ),
