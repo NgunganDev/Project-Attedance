@@ -184,7 +184,7 @@ Future<void> updatePhoto(String username, String url) async {
   await refcol.doc(username).update({
     'photoUrl': url,
   }).then((value) {
-    print('success add photo');
+    print('success add photos');
   });
 }
 
