@@ -157,17 +157,6 @@ Future<void> updateaccepted(
   }).then((value) {
     print('apakah sukses terpaksa menggunakan fungsi ini di feature 2');
   });
-
-  // CollectionReference datacol =
-  //     FirebaseFirestore.instance.collection('User Attedance');
-  // QuerySnapshot userapproved =
-  //     await datacol.where('timestamp', isEqualTo: date).get();
-  // for (var im in userapproved.docs) {
-  //   print(im.id);
-  //   await datacol.doc(im.id).update({"approved": true}).then((value) {
-  //     print('suicidal');
-  //   });
-  // }
 }
 
 Future<void> deleteItem(String username, String id) async {

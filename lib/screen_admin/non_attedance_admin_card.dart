@@ -60,7 +60,7 @@ class NonAttedanceCards extends StatelessWidget {
                       backgroundImage: NetworkImage(imgUrl),
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: size.height * 0.042,
                     ),
                     Text(
                       'User',
