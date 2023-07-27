@@ -65,7 +65,7 @@ class NonAttedanceCards extends StatelessWidget {
                     Text(
                       'User',
                       style: TextStyle(
-                          fontSize: size.height * 0.02,
+                          fontSize: size.height * 0.025,
                           fontWeight: FontWeight.w500),
                     )
                   ],
