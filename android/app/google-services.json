@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453313459947",
+    "project_id": "cloningsatunolnonresponsive",
+    "storage_bucket": "cloningsatunolnonresponsive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453313459947:android:a1298888d239fafa0930ae",
+        "android_client_info": {
+          "package_name": "com.example.attedance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453313459947-t0rm5nojktadj27q80jvraujhqb985c4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSAduWg8bjYehS6zgLychFFqMGPk_KhKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453313459947-t0rm5nojktadj27q80jvraujhqb985c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
