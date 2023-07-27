@@ -155,7 +155,7 @@ Future<void> updateaccepted(
   await datacosl.doc(username).update({
     "approved": condition,
   }).then((value) {
-    print('apakah sukses terpaksa menggunakan fungsi ini');
+    print('apakah sukses terpaksa menggunakan fungsi ini di feature 2');
   });
 
   // CollectionReference datacol =
