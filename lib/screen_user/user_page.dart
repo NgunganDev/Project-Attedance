@@ -178,12 +178,22 @@ class _UserPageState extends State<UserPage> {
                     expansionExtent: 20,
                     expandedWidget: SingleChildScrollView(
                       physics: const NeverScrollableScrollPhysics(),
-                      child: NewsCard(
-                          widths: size.width * 0.9,
-                          heights: size.height * 0.24,
-                          news: 'wkwwkk',
-                          time: 'Jul 12 2023',
-                          title: 'PPPP'),
+                      child: StreamBuilder(
+                        stream: FirebaseFirestore.instance.collection('News').doc(Format().FormatDate(DateTime.now())).snapshots(),
+                        builder: (context, snapshot) {
+                          if(snapshot.hasData){
+                            final data = snapshot.data!.data();
+                          return NewsCard(
+                              widths: size.width * 0.9,
+                              heights: size.height * 0.24,
+                              news: data!['information'] == null ? 'no news today' : data['information'],
+                              time: data['createdat'] ?? '---',
+                              title: data['title'] ?? '--');
+                          }else{
+                            return Container();
+                          }
+                        }
+                      ),
                     ),
                     backgroundWidget: Container(
                       width: size.width,

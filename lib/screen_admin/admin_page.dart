@@ -3,10 +3,12 @@
 // import 'dart:html';
 
 import 'package:attedance/authentication/auth_method.dart';
+import 'package:attedance/format/date_format.dart';
 import 'package:attedance/screen_admin/admin_card.dart';
 import 'package:attedance/screen_admin/history_attedance_admin.dart';
 import 'package:attedance/widget_use/admin_tile.dart';
 import 'package:attedance/widget_use/another_button.dart';
+import 'package:attedance/widget_use/text_control.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -24,6 +26,8 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
+  TextEditingController controlnews = TextEditingController();
+  TextEditingController controlinfos = TextEditingController();
   // User? user;
   List<ModelData> datanew = [];
   final datas = Mocking().data;
@@ -34,17 +38,94 @@ class _AdminPageState extends State<AdminPage> {
   }
 
   int gridindex = 0;
-  void routeadmin(BuildContext context){
-    switch(gridindex){
-      case 0: 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => AttTodayAdmin(email: widget.email,)));
+  void routeadmin(BuildContext context) {
+    switch (gridindex) {
+      case 0:
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AttTodayAdmin(
+                      email: widget.email,
+                    )));
       case 1:
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryAttedanceAdmin()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const HistoryAttedanceAdmin()));
       case 2:
-      return ;
+        return;
       case 3:
-      return;
+        return;
     }
+  }
+
+  void showPop(Size size) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            insetPadding: EdgeInsets.symmetric(
+                vertical: size.height * 0.1, horizontal: size.width * 0.08),
+            title: Text('Add Something'),
+            content: Container(
+              width: size.width,
+              height: size.height * 0.3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Textcontrol(
+                      controltext: controlnews,
+                      hintit: 'whats new today',
+                      colorfield: const Color.fromARGB(255, 228, 228, 228),
+                      widthit: size.width * 0.8,
+                      iconit: Icons.title_sharp),
+                  Textcontrol(
+                      controltext: controlinfos,
+                      hintit: 'add Information',
+                      colorfield: Color.fromARGB(255, 225, 224, 224),
+                      widthit: size.width * 0.8,
+                      iconit: Icons.info_outline_rounded)
+                ],
+              ),
+            ),
+            actions: [
+              SizedBox(
+                width: size.width * 0.7,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    AnotherButton(
+                        btnname: 'cancel',
+                        action: () {
+                          Navigator.pop(context);
+                        },
+                        width: size.width * 0.3,
+                        height: size.height * 0.08,
+                        colors: const Color.fromARGB(255, 126, 126, 126),
+                        size: size,
+                        radius: 18),
+                    SizedBox(
+                      width: size.width * 0.04,
+                    ),
+                    AnotherButton(
+                        btnname: 'add',
+                        action: () async {
+                          Navigator.pop(context);
+                          await inputNews(controlnews.text, controlinfos.text,
+                              Format().FormatDate(DateTime.now()));
+                        },
+                        width: size.width * 0.3,
+                        height: size.height * 0.08,
+                        colors: Colors.blueAccent,
+                        size: size,
+                        radius: 18),
+                  ],
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -93,7 +174,7 @@ class _AdminPageState extends State<AdminPage> {
                                   fontWeight: FontWeight.w600),
                             ),
                             InkWell(
-                              onTap: (){
+                              onTap: () {
                                 signout(context);
                               },
                               child: Text(
@@ -124,8 +205,10 @@ class _AdminPageState extends State<AdminPage> {
                 height: size.height * 0.05,
               ),
               AnotherButton(
-                  btnname: 'Check Attedance',
-                  action: () {},
+                  btnname: 'Add News',
+                  action: () {
+                    showPop(size);
+                  },
                   width: size.width * 0.85,
                   height: size.height * 0.08,
                   colors: Colors.blue,
@@ -151,13 +234,13 @@ class _AdminPageState extends State<AdminPage> {
                               child: ScaleAnimation(
                                 child: FadeInAnimation(
                                   child: InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        gridindex = index;
-                                        routeadmin(context);
-                                      });
-                                    },
-                                    child: AdminTile(model: datanew[index])),
+                                      onTap: () {
+                                        setState(() {
+                                          gridindex = index;
+                                          routeadmin(context);
+                                        });
+                                      },
+                                      child: AdminTile(model: datanew[index])),
                                 ),
                               ),
                             );

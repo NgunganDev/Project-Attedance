@@ -1,5 +1,3 @@
-// /import 'dart:html';
-
 import 'package:attedance/format/date_format.dart';
 import 'package:attedance/main_page.dart';
 import 'package:attedance/routed/routed.dart';
@@ -7,7 +5,6 @@ import 'package:attedance/screen_admin/admin_page.dart';
 import 'package:attedance/screen_user/user_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -181,7 +178,18 @@ Future<void> updatePhoto(String username, String url) async {
 
 Future<void> inputNews(String title, String text, String path) async {
   CollectionReference refNews = FirebaseFirestore.instance.collection('News');
-  await refNews.doc(path).update({
+  await refNews.doc(path).set({
+    'title': title,
+    'information': text,
+    'createdat': Format().FormatDate(DateTime.now())
+  }).then((value) {
+    print('news added');
+  });
+}
+
+Future<void> editNews(String title, String text, String path) async {
+  CollectionReference refNews = FirebaseFirestore.instance.collection('News');
+   await refNews.doc(path).update({
     'title': title,
     'information': text,
     'createdat': Format().FormatDate(DateTime.now())
